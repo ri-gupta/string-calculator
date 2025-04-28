@@ -9,23 +9,23 @@ class CalculatorTest < Test::Unit::TestCase
   end
 
   def test_empty_string
-    assert_equal 0, Calculator.add(''), "Adding empty string return 0"
+    assert_equal 0, Calculator.add(""), "Adding empty string return 0"
   end
 
   def test_single_number_string
-    assert_equal 22, Calculator.add('22'), "Passing single number string return itself"
+    assert_equal 22, Calculator.add("22"), "Passing single number string return itself"
   end
 
   def test_comma_separated_addition
-    assert_equal 15, Calculator.add('9,6'), 'Adding comma separated values'
+    assert_equal 15, Calculator.add("9,6"), 'Adding comma separated values'
   end
 
   def test_comma_separated_with_whitespaces
-    assert_equal 22, Calculator.add(' 9,6, 7 '), 'Adding comma separated values'
+    assert_equal 22, Calculator.add(" 9,6, 7 "), 'Adding comma separated values'
   end
 
   def test_new_line_separated_additions
-    assert_equal 26, Calculator.add('2\n7,9,\n8'), 'Adding comma separated values'
+    assert_equal 26, Calculator.add("2\n7,9,\n8"), 'Adding comma separated values'
   end
 
   def test_custom_delimitor
