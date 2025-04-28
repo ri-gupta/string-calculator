@@ -10,4 +10,10 @@ class CalculatorTest < Test::Unit::TestCase
     assert_equal 22, Calculator.add('22'), "Passing single number string return itself"
   end
 
+  def test_non_string
+    assert_raise(ArgumentError, "Invalid input, expected string of comma / endline separated numbers") do
+      Calculator.add(22)
+    end
+  end
+
 end
