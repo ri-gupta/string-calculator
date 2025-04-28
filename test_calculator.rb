@@ -11,7 +11,7 @@ class CalculatorTest < Test::Unit::TestCase
   end
 
   def test_non_string_error
-    assert_raise(ArgumentError, "Invalid input, expected string of comma / endline separated numbers") do
+    assert_raise(ArgumentError, "Invalid input type #{22.class}, expected string of comma / endline separated numbers") do
       Calculator.add(22)
     end
   end
