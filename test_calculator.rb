@@ -28,7 +28,11 @@ class CalculatorTest < Test::Unit::TestCase
     assert_equal 26, Calculator.add("2\n7,9,\n8"), 'Adding comma separated values'
   end
 
-  def test_custom_delimitor
-    assert_equal 3, Calculator.add("//;\n1;2"), "Adding numbers separated by delimitor in 1st line"
+  def test_custom_delimiter
+    assert_equal 3, Calculator.add("//;\n1;2"), "Adding numbers separated by ; delimiter in 1st line"
+
+    assert_equal 3, Calculator.add("//\n\n1\n2"), "Adding numbers separated by \n delimiter in 1st line"
+
+    assert_equal 12, Calculator.add("//,\n1\n2,9"), "Adding numbers separated by , delimiter in 1st line"
   end
 end
