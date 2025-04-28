@@ -20,4 +20,8 @@ class CalculatorTest < Test::Unit::TestCase
     assert_equal 15, Calculator.add('9,6'), 'Adding comma separated values'
   end
 
+  def test_comma_separated_with_whitespaces
+    assert_equal 22, Calculator.add(' 9,6, 7 '), 'Adding comma separated values'
+  end
+
 end
