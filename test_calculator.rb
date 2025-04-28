@@ -16,4 +16,9 @@ class CalculatorTest < Test::Unit::TestCase
     end
   end
 
+
+  def test_comma_separated_addition
+    assert_equal 15, Calculator.add('9,6'), 'Adding comma separated values'
+  end
+
 end
