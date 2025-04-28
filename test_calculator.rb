@@ -6,4 +6,8 @@ class CalculatorTest < Test::Unit::TestCase
     assert_equal 0, Calculator.add(''), "Adding empty string return 0"
   end
 
+  def test_single_number
+    assert_equal 22, Calculator.add('22'), "Passing single number string return itself"
+  end
+
 end
