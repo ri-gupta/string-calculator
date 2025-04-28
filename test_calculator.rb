@@ -27,4 +27,8 @@ class CalculatorTest < Test::Unit::TestCase
   def test_new_line_separated_additions
     assert_equal 26, Calculator.add('2\n7,9,\n8'), 'Adding comma separated values'
   end
+
+  def test_custom_delimitor
+    assert_equal 3, Calculator.add("//;\n1;2"), "Adding numbers separated by delimitor in 1st line"
+  end
 end
