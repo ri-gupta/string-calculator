@@ -6,6 +6,7 @@ class Calculator
     nums = parse_numbers(numbers, delimiter)
 
     validate_no_negatives(nums)
+    select_numbers_upto(nums, 1000)
 
     nums.sum
   end
@@ -35,5 +36,9 @@ class Calculator
     unless negatives.empty?
       raise ArgumentError, "negative numbers not allowed #{negatives.join(',')}"
     end
+  end
+
+  def self.select_numbers_upto(nums, max_limit)
+    nums.select! { |num| num <= max_limit }
   end
 end

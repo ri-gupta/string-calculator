@@ -18,9 +18,7 @@ class CalculatorTest < Test::Unit::TestCase
 
   def test_comma_separated_addition
     assert_equal 15, Calculator.add("9,6"), 'Adding comma separated values'
-  end
 
-  def test_comma_separated_with_whitespaces
     assert_equal 22, Calculator.add(" 9,6, 7 "), 'Adding comma separated values'
   end
 
@@ -44,5 +42,9 @@ class CalculatorTest < Test::Unit::TestCase
     assert_raise(ArgumentError, "negative numbers not allowed -41,-1") do
       Calculator.add('-41,20,-1,30')
     end
+  end
+
+  def test_skip_big_integers
+    assert_equal 1099, Calculator.add("//,\n1\n2,9,1000,1002,8,56, 23"), "Should skip any number greater than 1000 in addition"
   end
 end
