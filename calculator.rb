@@ -1,27 +1,39 @@
 class Calculator
   def self.add(numbers)
-    raise ArgumentError, "Invalid input type #{numbers.class}, expected string of comma / endline separated numbers" unless numbers.is_a? String
-    
+    validate_string_input(numbers)
+
+    delimiter, numbers = extract_delimiter_and_numbers(numbers)
+    nums = parse_numbers(numbers, delimiter)
+
+    validate_no_negatives(nums)
+
+    nums.sum
+  end
+
+  private
+
+  def self.validate_string_input(numbers)
+    unless numbers.is_a? String
+      raise ArgumentError, "invalid input type #{numbers.class}, expected string of comma or endline separated numbers"
+    end
+  end
+
+  def self.extract_delimiter_and_numbers(numbers)
     if numbers.start_with?("//")
-      delimiter, numbers = numbers[2..-1].split("\n", 2) # split from 2nd char onwards by \n into 2 partsspli
+      numbers[2..-1].split("\n", 2)
     else
-      delimiter = ","
+      [",", numbers]
     end
+  end
 
-    nums = numbers.split("\n").join(',').split(delimiter)
+  def self.parse_numbers(numbers, delimiter)
+    numbers.split("\n").join(',').split(delimiter).map(&:to_i)
+  end
 
-    negatives = []
-    sum = 0
-
-    nums.each do |num|
-      num = num.to_i
-      negatives << num if num < 0
-
-      sum += num
+  def self.validate_no_negatives(nums)
+    negatives = nums.select { |num| num < 0 }
+    unless negatives.empty?
+      raise ArgumentError, "negative numbers not allowed #{negatives.join(',')}"
     end
-
-    raise ArgumentError, "negative numbers not allowed #{negatives.join(',')}" unless negatives.empty?
-
-    sum
   end
 end
