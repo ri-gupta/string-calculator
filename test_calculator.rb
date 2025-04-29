@@ -35,4 +35,14 @@ class CalculatorTest < Test::Unit::TestCase
 
     assert_equal 12, Calculator.add("//,\n1\n2,9"), "Adding numbers separated by , delimiter in 1st line"
   end
+
+  def test_avoid_negatives
+    assert_raise(ArgumentError, "negative numbers not allowed -41") do
+      Calculator.add('-41')
+    end
+
+    assert_raise(ArgumentError, "negative numbers not allowed -41,-1") do
+      Calculator.add('-41,20,-1,30')
+    end
+  end
 end

@@ -8,6 +8,20 @@ class Calculator
       delimiter = ","
     end
 
-    numbers.split("\n").join(',').split(delimiter).reduce(0) { |sum, num| sum + num.to_i }
+    nums = numbers.split("\n").join(',').split(delimiter)
+
+    negatives = []
+    sum = 0
+
+    nums.each do |num|
+      num = num.to_i
+      negatives << num if num < 0
+
+      sum += num
+    end
+
+    raise ArgumentError, "negative numbers not allowed #{negatives.join(',')}" unless negatives.empty?
+
+    sum
   end
 end
