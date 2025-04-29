@@ -20,20 +20,21 @@ class Calculator
   end
 
     def self.extract_delimiter_and_numbers(numbers)
-      if numbers.start_with?("//")
-        delimiter_section, numbers = numbers[2..-1].split("\n", 2)
-        if delimiter_section.start_with?("[") && delimiter_section.end_with?("]")
-          delimiters = delimiter_section.split("][")
+      return [[","], numbers] unless numbers.start_with?("//")
+      
+      delimiter_section, numbers = numbers[2..-1].split("\n", 2)
+      if delimiter_section.start_with?("[") && delimiter_section.end_with?("]")
+        # multiple delimiters
+        delimiters = delimiter_section.split("][")
 
-          delimiters[0] = delimiters[0][1..-1] # skip the first [ for first delimiter
-          delimiters[-1] = delimiters[-1][0..-2] # skip the last ] for last delimiter
-        else
-          delimiters = [delimiter_section]
-        end
-        [delimiters, numbers]
+        delimiters[0] = delimiters[0][1..-1] # skip the first [ for first delimiter
+        delimiters[-1] = delimiters[-1][0..-2] # skip the last ] for last delimiter
       else
-        [[","], numbers]
+        # single delimiter
+        delimiters = [delimiter_section]
       end
+
+      [delimiters, numbers]
     end
 
   def self.parse_numbers(numbers, delimiters)
