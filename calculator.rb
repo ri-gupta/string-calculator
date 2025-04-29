@@ -19,13 +19,19 @@ class Calculator
     end
   end
 
-  def self.extract_delimiter_and_numbers(numbers)
-    if numbers.start_with?("//")
-      numbers[2..-1].split("\n", 2)
-    else
-      [",", numbers]
+    def self.extract_delimiter_and_numbers(numbers)
+      if numbers.start_with?("//")
+        delimiter_section, numbers = numbers[2..-1].split("\n", 2)
+        if delimiter_section.start_with?("[") && delimiter_section.end_with?("]")
+          delimiter = delimiter_section[1..-2]
+        else
+          delimiter = delimiter_section
+        end
+        [delimiter, numbers]
+      else
+        [",", numbers]
+      end
     end
-  end
 
   def self.parse_numbers(numbers, delimiter)
     numbers.split("\n").join(',').split(delimiter).map(&:to_i)

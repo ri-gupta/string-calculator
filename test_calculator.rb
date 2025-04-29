@@ -50,5 +50,7 @@ class CalculatorTest < Test::Unit::TestCase
 
   def test_delimitor_with_dynamic_length
     assert_equal 6, Calculator.add("//[***]\n1***2***3"), "Return 6 with delimiter ***"
+
+    assert_equal 7, Calculator.add("//[%%%%%%]\n1%%%%%%2%%%%%%4 %%%%%% 1004"), "Return 7 with delimiter %%%%%%"
   end
 end
