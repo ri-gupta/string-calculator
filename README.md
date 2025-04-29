@@ -33,3 +33,9 @@ if there are multiple negatives, show all of them in the exception message.
 8. Allow multiple delimiters like this: “//[delim1][delim2]\n” for example “//[*][%]\n1*2%3” should return 6.
 ————————————————————————————————
 9. make sure you can also handle multiple delimiters with length longer than one char
+
+
+
+# Setup
+- Install Ruby
+- run tests by `ruby test_calculator.rb`
