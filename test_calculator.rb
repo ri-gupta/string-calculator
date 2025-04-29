@@ -53,4 +53,8 @@ class CalculatorTest < Test::Unit::TestCase
 
     assert_equal 7, Calculator.add("//[%%%%%%]\n1%%%%%%2%%%%%%4 %%%%%% 1004"), "Return 7 with delimiter %%%%%%"
   end
+
+  def test_multiple_delimiters
+    assert_equal 6, Calculator.add("//[*][%]\n1*2%3"), "Return 6 with delimiters * & %"
+  end
 end
