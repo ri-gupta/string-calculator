@@ -47,4 +47,8 @@ class CalculatorTest < Test::Unit::TestCase
   def test_skip_big_integers
     assert_equal 1099, Calculator.add("//,\n1\n2,9,1000,1002,8,56, 23"), "Should skip any number greater than 1000 in addition"
   end
+
+  def test_delimitor_with_dynamic_length
+    assert_equal 6, Calculator.add("//[***]\n1***2***3"), "Return 6 with delimiter ***"
+  end
 end
