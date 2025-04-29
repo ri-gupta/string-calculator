@@ -56,5 +56,7 @@ class CalculatorTest < Test::Unit::TestCase
 
   def test_multiple_delimiters
     assert_equal 6, Calculator.add("//[*][%]\n1*2%3"), "Return 6 with delimiters * & %"
+
+    assert_equal 10, Calculator.add("//[**][%$][&&@]\n1**2%$3&&@4"), "Return 10 with delimiters **, %$ & &&@"
   end
 end

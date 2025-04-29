@@ -2,8 +2,8 @@ class Calculator
   def self.add(numbers)
     validate_string_input(numbers)
 
-    delimiter, numbers = extract_delimiter_and_numbers(numbers)
-    nums = parse_numbers(numbers, delimiter)
+    delimiters, numbers = extract_delimiter_and_numbers(numbers)
+    nums = parse_numbers(numbers, delimiters)
 
     validate_no_negatives(nums)
     select_numbers_upto(nums, 1000)
@@ -23,18 +23,25 @@ class Calculator
       if numbers.start_with?("//")
         delimiter_section, numbers = numbers[2..-1].split("\n", 2)
         if delimiter_section.start_with?("[") && delimiter_section.end_with?("]")
-          delimiter = delimiter_section[1..-2]
+          delimiters = delimiter_section.split("][")
+
+          delimiters[0] = delimiters[0][1..-1] # skip the first [ for first delimiter
+          delimiters[-1] = delimiters[-1][0..-2] # skip the last ] for last delimiter
         else
-          delimiter = delimiter_section
+          delimiters = [delimiter_section]
         end
-        [delimiter, numbers]
+        [delimiters, numbers]
       else
-        [",", numbers]
+        [[","], numbers]
       end
     end
 
-  def self.parse_numbers(numbers, delimiter)
-    numbers.split("\n").join(',').split(delimiter).map(&:to_i)
+  def self.parse_numbers(numbers, delimiters)
+    regexp = "\\n"
+
+    delimiters.each { |d| regexp << "|#{Regexp.escape(d)}"}
+
+    numbers.split(Regexp.new(regexp)).map(&:to_i)
   end
 
   def self.validate_no_negatives(nums)
